@@ -1,166 +1,166 @@
 #include <iostream>
+
 using namespace std;
 
-class IWorker abstract
-{
+class WorkerInterface {
 public:
-    virtual void Work() abstract;
-    virtual void GainSalary() abstract;
-    virtual void QuitJob()abstract;
+    virtual void performWork() = 0;
+    virtual void receiveSalary() = 0;
+    virtual void resignJob() = 0;
+    virtual ~WorkerInterface() = default;
 };
 
-class IWarehouseOperator
-{
+class WarehouseOperations {
 public:
-    virtual void AddProduct() abstract;
-    virtual void RemoveProduct() abstract;
-    virtual void EditProduct() abstract;
+    virtual void addItem() = 0;
+    virtual void deleteItem() = 0;
+    virtual void modifyItem() = 0;
+    virtual ~WarehouseOperations() = default;
 };
 
-class IWarehouseManager
-{
+class WarehouseManagement {
 public:
-    virtual void BrowseProducts()abstract;
-    virtual void ManageInventory() abstract;
+    virtual void reviewItems() = 0;
+    virtual void controlInventory() = 0;
+    virtual ~WarehouseManagement() = default;
 };
 
-class IWarehouseMerchandise
-{
+class WarehouseMerchandise {
 public:
-    virtual void BrowseProducts() abstract;
-    virtual void MarkProducts() abstract;
-
+    virtual void reviewItems() = 0;
+    virtual void tagItems() = 0;
+    virtual ~WarehouseMerchandise() = default;
 };
 
-class IWarehouseLoader {
+class WarehouseTransport {
 public:
-    virtual void LoadProducts() abstract;
-    virtual void UnloadProducts() abstract;
+    virtual void packItems() = 0;
+    virtual void unpackItems() = 0;
+    virtual ~WarehouseTransport() = default;
 };
 
-
-class IWarehouseQualityControl {
+class WarehouseInspection {
 public:
-    virtual void InspectProducts() abstract;
-    virtual void SortProducts() abstract;
+    virtual void evaluateItems() = 0;
+    virtual void categorizeItems() = 0;
+    virtual ~WarehouseInspection() = default;
 };
 
-
-class WarehouseOperator : public IWarehouseOperator, public IWorker {
+class OperationsStaff : public WarehouseOperations, public WorkerInterface {
 public:
-
-    void Work() override
-    {
-        cout << "Warehouse operator is working \n";
+    void performWork() override {
+        cout << "Operations staff is engaged in work\n";
     }
 
-    void AddProduct() override {
-        cout << "Warehouse operator is adding a product\n";
+    void addItem() override {
+        cout << "Operations staff is adding an item\n";
     }
 
-    void RemoveProduct() override {
-        cout << "Warehouse operator is deleting a product\n";
+    void deleteItem() override {
+        cout << "Operations staff is removing an item\n";
     }
 
-    void EditProduct() override {
-        cout << "Warehouse operator is editing a product\n";
+    void modifyItem() override {
+        cout << "Operations staff is modifying an item\n";
     }
 };
 
-class WarehouseManager : public IWarehouseManager, public IWorker {
+class ManagementStaff : public WarehouseManagement, public WorkerInterface {
 public:
-    void Work() override {
-        cout << "Warehouse manager is working\n";
+    void performWork() override {
+        cout << "Management staff is engaged in work\n";
     }
 
-    void GainSalary() override {
-        cout << "Warehouse manager is gaining salary\n";
+    void receiveSalary() override {
+        cout << "Management staff is receiving salary\n";
     }
 
-    void QuitJob() override {
-        cout << "Warehouse manager is quitting the job\n";
+    void resignJob() override {
+        cout << "Management staff is resigning from the job\n";
     }
 
-    void BrowseProducts() override {
-        cout << "Warehouse manager is browsing products\n";
+    void reviewItems() override {
+        cout << "Management staff is reviewing items\n";
     }
 
-    void ManageInventory() override {
-        cout << "Warehouse manager is managing inventory\n";
+    void controlInventory() override {
+        cout << "Management staff is overseeing inventory\n";
     }
 };
 
-class WarehouseMerchandise : public IWarehouseMerchandise, public IWorker {
+class MerchandiseStaff : public WarehouseMerchandise, public WorkerInterface {
 public:
-    void Work() override {
-        cout << "Warehouse merchandise specialist is working\n";
+    void performWork() override {
+        cout << "Merchandise staff is engaged in work\n";
     }
 
-    void GainSalary() override {
-        cout << "Warehouse merchandise specialist is gaining salary\n";
+    void receiveSalary() override {
+        cout << "Merchandise staff is receiving salary\n";
     }
 
-    void QuitJob() override {
-        cout << "Warehouse merchandise specialist is quitting the job\n";
+    void resignJob() override {
+        cout << "Merchandise staff is leaving the position\n";
     }
 
-    void BrowseProducts() override {
-        cout << "Warehouse merchandise specialist is browsing products\n";
+    void reviewItems() override {
+        cout << "Merchandise staff is reviewing items\n";
     }
 
-    void MarkProducts() override {
-        cout << "Warehouse merchandise specialist is marking products\n";
+    void tagItems() override {
+        cout << "Merchandise staff is marking items\n";
     }
 };
 
-class WarehouseLoader : public IWarehouseLoader, public IWorker {
+class TransportStaff : public WarehouseTransport, public WorkerInterface {
 public:
-    void Work() override {
-        cout << "Warehouse loader is working\n";
+    void performWork() override {
+        cout << "Transport staff is engaged in work\n";
     }
 
-    void GainSalary() override {
-        cout << "Warehouse loader is gaining salary\n";
+    void receiveSalary() override {
+        cout << "Transport staff is receiving salary\n";
     }
 
-    void QuitJob() override {
-        cout << "Warehouse loader is quitting the job\n";
+    void resignJob() override {
+        cout << "Transport staff is leaving the position\n";
     }
 
-    void LoadProducts() override {
-        cout << "Warehouse loader is loading products\n";
+    void packItems() override {
+        cout << "Transport staff is packing items\n";
     }
 
-    void UnloadProducts() override {
-        cout << "Warehouse loader is unloading products\n";
+    void unpackItems() override {
+        cout << "Transport staff is unpacking items\n";
     }
 };
 
-class WarehouseQualityControl : public IWarehouseQualityControl, public IWorker {
+class InspectionStaff : public WarehouseInspection, public WorkerInterface {
 public:
-    void Work() override {
-        cout << "Warehouse quality control specialist is working\n";
+    void performWork() override {
+        cout << "Inspection staff is engaged in work\n";
     }
 
-    void GainSalary() override {
-        cout << "Warehouse quality control specialist is gaining salary\n";
+    void receiveSalary() override {
+        cout << "Inspection staff is receiving salary\n";
     }
 
-    void QuitJob() override {
-        cout << "Warehouse quality control specialist is quitting the job\n";
+    void resignJob() override {
+        cout << "Inspection staff is leaving the position\n";
     }
 
-    void InspectProducts() override {
-        cout << "Warehouse quality control specialist is inspecting products\n";
+    void evaluateItems() override {
+        cout << "Inspection staff is inspecting items\n";
     }
 
-    void SortProducts() override {
-        cout << "Warehouse quality control specialist is sorting products\n";
+    void categorizeItems() override {
+        cout << "Inspection staff is sorting items\n";
     }
 };
 
-int main()
-{
-    IWarehouseLoader* loader = new WarehouseLoader;
-    loader->LoadProducts();
+int main() {
+    WarehouseTransport* transportWorker = new TransportStaff;
+    transportWorker->packItems();
+
+    delete transportWorker;
+    return 0;
 }
